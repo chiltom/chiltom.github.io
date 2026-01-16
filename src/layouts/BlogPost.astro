@@ -5,82 +5,98 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import ReadingProgress from '../components/ReadingProgress';
+import TableOfContents from '../components/TableOfContents';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: { depth: number; slug: string; text: string }[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings = [] } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
-	<body>
+	<body class="min-h-screen flex flex-col">
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+
+		<!-- Reading Progress Bar -->
+		<ReadingProgress client:load />
+
+		<div class="flex-1">
+			<div class="max-w-6xl mx-auto px-6 py-12">
+				<!-- Hero Image -->
+				{heroImage && (
+					<div class="mb-12 rounded-2xl overflow-hidden shadow-xl">
+						<Image
+							width={1200}
+							height={600}
+							src={heroImage}
+							alt={title}
+							class="w-full h-auto object-cover"
+						/>
 					</div>
-					<slot />
+				)}
+
+				<div class="grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-12">
+					<!-- Main Content -->
+					<article class="min-w-0">
+						<!-- Article Header -->
+						<header class="mb-12">
+							<div class="mb-4 text-gray-600">
+								<FormattedDate date={pubDate} />
+								{updatedDate && (
+									<span class="italic ml-2">
+										(Updated: <FormattedDate date={updatedDate} />)
+									</span>
+								)}
+							</div>
+							<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+								{title}
+							</h1>
+							<p class="text-xl text-gray-600 leading-relaxed">
+								{description}
+							</p>
+							<hr class="mt-8 border-gray-200" />
+						</header>
+
+						<!-- Table of Contents (Mobile) -->
+						{headings.length > 0 && (
+							<TableOfContents headings={headings} client:visible />
+						)}
+
+						<!-- Article Content -->
+						<div class="prose prose-lg max-w-none">
+							<slot />
+						</div>
+
+						<!-- Back Navigation -->
+						<div class="mt-16 pt-8 border-t border-gray-200">
+							<a
+								href="/blog"
+								class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+							>
+								<svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+								</svg>
+								Back to all posts
+							</a>
+						</div>
+					</article>
+
+					<!-- Table of Contents Sidebar (Desktop) -->
+					{headings.length > 0 && (
+						<aside class="hidden lg:block">
+							<TableOfContents headings={headings} client:visible />
+						</aside>
+					)}
 				</div>
-			</article>
-		</main>
+			</div>
+		</div>
+
 		<Footer />
 	</body>
 </html>
