@@ -20,7 +20,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body class="min-h-screen flex flex-col">
+	<body class="min-h-screen flex flex-col bg-white dark:bg-gray-950">
 		<Header />
 
 		<!-- Reading Progress Bar -->
@@ -46,7 +46,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 					<article class="min-w-0">
 						<!-- Article Header -->
 						<header class="mb-12">
-							<div class="mb-4 text-gray-600">
+							<div class="mb-4 text-gray-600 dark:text-gray-400">
 								<FormattedDate date={pubDate} />
 								{updatedDate && (
 									<span class="italic ml-2">
@@ -54,13 +54,13 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 									</span>
 								)}
 							</div>
-							<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+							<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
 								{title}
 							</h1>
-							<p class="text-xl text-gray-600 leading-relaxed">
+							<p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
 								{description}
 							</p>
-							<hr class="mt-8 border-gray-200" />
+							<hr class="mt-8 border-gray-200 dark:border-gray-700" />
 						</header>
 
 						<!-- Table of Contents (Mobile) -->
@@ -74,10 +74,10 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 						</div>
 
 						<!-- Back Navigation -->
-						<div class="mt-16 pt-8 border-t border-gray-200">
+						<div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
 							<a
 								href="/blog"
-								class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+								class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-500 font-medium group"
 							>
 								<svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>

@@ -124,17 +124,66 @@ export async function getStaticPaths() {
 - Integrated via `@tailwindcss/vite` plugin
 - Import in astro.config.mjs as Vite plugin
 - Utility-first CSS in component templates
+- Configured for class-based dark mode using `@variant dark` directive
 
 **Global Styles:** src/styles/global.css
 - Bear Blog-inspired minimal aesthetic
-- CSS custom properties for color theming
+- CSS custom properties for color theming (light + dark)
 - Base typography styles for article content
 - Responsive design defaults
+- Dark mode configured with `.dark` class selector
 
 **Styling Approaches:**
 1. Tailwind utilities in component templates (preferred for layout)
 2. Scoped `<style>` blocks in .astro files (component-specific styles)
 3. Global CSS for base typography and theme variables
+
+### Dark Mode Implementation
+
+**Architecture:**
+- Class-based dark mode using `.dark` class on `<html>` element
+- System preference detection with localStorage override
+- FOUC (Flash of Unstyled Content) prevention
+
+**Key Files:**
+
+1. **src/styles/global.css**
+   - Line 9: `@variant dark (&:where(.dark, .dark *))` - Configures Tailwind v4 for class-based dark mode
+   - Lines 39-60: Dark theme CSS variables (inverted colors, adjusted shadows)
+   - Lines 275-322: Dark mode prose styles for blog content
+
+2. **src/components/BaseHead.astro**
+   - Lines 59-79: Inline script that runs before page render
+   - Checks localStorage for saved theme preference
+   - Falls back to system preference via `prefers-color-scheme` media query
+   - Adds/removes `.dark` class on `<html>` element immediately
+
+3. **src/components/ThemeToggle.tsx**
+   - React component with state management for theme switching
+   - Persists choice to localStorage
+   - Detects system preference on mount
+   - Shows sun/moon icon based on current theme
+   - Fully accessible with ARIA labels and keyboard navigation
+
+**Usage Pattern:**
+All components use Tailwind's `dark:` variant for dark mode styles:
+```astro
+<div class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+  Content that adapts to theme
+</div>
+```
+
+**Dark Mode Color Palette:**
+- Backgrounds: `dark:bg-gray-950`, `dark:bg-gray-900`, `dark:bg-gray-800`
+- Text: `dark:text-gray-100`, `dark:text-gray-300`, `dark:text-gray-400`
+- Accents: `dark:text-blue-400`, `dark:bg-blue-900`
+- Borders: `dark:border-gray-700`
+
+**Integration Points:**
+- Header: ThemeToggle component rendered with `client:only="react"`
+- All pages: Body backgrounds, text colors, card backgrounds
+- Blog posts: Prose styles, code blocks, blockquotes
+- Interactive elements: Buttons, links, hover states
 
 ## Content Creation Workflow
 

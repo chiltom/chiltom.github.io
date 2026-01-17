@@ -55,3 +55,25 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Theme Detection (Prevent FOUC - Flash of Unstyled Content) -->
+<script is:inline>
+	// This script runs immediately before the page renders to prevent theme flash
+	(function() {
+		// Check localStorage for saved theme preference
+		const savedTheme = localStorage.getItem('theme');
+
+		// Fall back to system preference if no saved theme
+		const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+		// Determine which theme to use
+		const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+
+		// Set the theme on the document element immediately using class
+		if (theme === 'dark') {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
+	})();
+</script>

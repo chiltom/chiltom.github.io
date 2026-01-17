@@ -5,6 +5,9 @@
 */
 @import "tailwindcss";
 
+/* Configure Tailwind v4 to use class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
 /* ============================================
    Design Tokens & CSS Custom Properties
    ============================================ */
@@ -36,6 +39,29 @@
   --box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
 }
 
+/* Dark Theme Variables */
+.dark {
+  /* Brand Colors - Adjusted for better visibility on dark backgrounds */
+  --accent: #6b7fff;
+  --accent-light: #a5b4ff;
+  --accent-lighter: #d0d9ff;
+  --accent-dark: #2337ff;
+
+  /* Grayscale - Inverted for dark mode */
+  --black: 229, 233, 240;
+  --gray: 156, 163, 175;
+  --gray-light: 55, 65, 81;
+  --gray-dark: 209, 213, 219;
+  --gray-gradient: rgba(var(--gray-light), 50%), #111827;
+
+  /* Shadows - Lighter for dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
 /* ============================================
    Font Face Declarations
    ============================================ */
@@ -60,6 +86,7 @@
    ============================================ */
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -247,6 +274,55 @@ body {
 .prose th {
   background-color: rgba(var(--gray-light), 0.5);
   font-weight: 600;
+}
+
+/* Dark Mode Prose Styles */
+.dark .prose {
+  color: rgb(var(--gray-dark));
+}
+
+.dark .prose h1 {
+  background: linear-gradient(to right, #60a5fa, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  color: rgb(var(--black));
+}
+
+.dark .prose a:hover {
+  background-color: rgba(107, 127, 255, 0.15);
+}
+
+.dark .prose code {
+  background-color: rgba(107, 127, 255, 0.15);
+  border: 1px solid rgba(107, 127, 255, 0.3);
+}
+
+.dark .prose pre {
+  background-color: rgb(17, 24, 39);
+}
+
+.dark .prose blockquote {
+  background: rgba(107, 127, 255, 0.1);
+  color: rgb(var(--gray-dark));
+}
+
+.dark .prose hr {
+  border-top-color: rgb(var(--gray-light));
+}
+
+.dark .prose th,
+.dark .prose td {
+  border-color: rgb(var(--gray-light));
+}
+
+.dark .prose th {
+  background-color: rgba(var(--gray-light), 0.5);
 }
 
 /* ============================================
