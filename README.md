@@ -1,12 +1,12 @@
 # Tom's Notes
 
-A modern, performant personal engineering blog built with Astro v5, featuring a beautiful dark mode and seamless reading experience.
+A modern, performant personal engineering blog built with Astro v5, featuring a seamless reading experience.
 
 ## ✨ Features
 
 ### Core Features
+
 - **Modern Stack**: Built with Astro v5, React 19, TypeScript, and Tailwind CSS v4
-- **Dark Mode**: Beautiful class-based dark theme with system preference detection
 - **Type-Safe Content**: Content Collections with Zod schema validation
 - **Optimized Performance**: Static site generation with fast page loads
 - **SEO Optimized**: Canonical URLs, Open Graph tags, Twitter Cards, and sitemap
@@ -15,14 +15,16 @@ A modern, performant personal engineering blog built with Astro v5, featuring a 
 - **Responsive Design**: Mobile-first approach with beautiful layouts
 
 ### Interactive Features
+
 - **Theme Toggle**: Seamless switching between light and dark modes
 - **Smart Theme Detection**: Respects system preferences with localStorage persistence
 - **FOUC Prevention**: No flash of unstyled content on page load
 - **Accessible**: Keyboard navigation, ARIA labels, and semantic HTML
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or your preferred package manager
 
@@ -42,7 +44,7 @@ npm run dev
 
 Visit `http://localhost:4321` to see your blog in action!
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 /
@@ -67,23 +69,23 @@ Visit `http://localhost:4321` to see your blog in action!
 │   │   ├── about.astro          # About page
 │   │   └── rss.xml.js           # RSS feed
 │   ├── styles/
-│   │   └── global.css           # Global styles + dark mode
+│   │   └── global.css           # Global styles
 │   └── consts.ts       # Site configuration
 ├── astro.config.mjs    # Astro configuration
 ├── CLAUDE.md           # Developer documentation
 └── package.json
 ```
 
-## ✍️ Writing a Blog Post
+## Writing a Blog Post
 
 1. Create a new `.md` or `.mdx` file in `src/content/blog/`:
 
 ```markdown
 ---
-title: 'Your Post Title'
-description: 'A brief description for SEO and previews'
+title: "Your Post Title"
+description: "A brief description for SEO and previews"
 pubDate: 2026-01-16
-heroImage: '/path/to/image.jpg'  # Optional
+heroImage: "/path/to/image.jpg" # Optional
 ---
 
 Your content here! Write in Markdown or MDX.
@@ -96,79 +98,49 @@ Your content here! Write in Markdown or MDX.
    - Appears in the RSS feed
    - Gets validated against the content schema
 
-## 🎨 Dark Mode Implementation
+## Development Commands
 
-This blog features a sophisticated dark mode implementation:
+| Command           | Action                               |
+| ----------------- | ------------------------------------ |
+| `npm install`     | Install dependencies                 |
+| `npm run dev`     | Start dev server at `localhost:4321` |
+| `npm run build`   | Build production site to `./dist/`   |
+| `npm run preview` | Preview production build locally     |
+| `npm run astro`   | Run Astro CLI commands               |
 
-### How It Works
-- **Class-based**: Uses `.dark` class on `<html>` element
-- **System Detection**: Automatically detects OS/browser dark mode preference
-- **User Preference**: Manual toggle overrides system setting
-- **Persistent**: Choice saved to localStorage
-- **Zero Flash**: FOUC prevention ensures correct theme on page load
-
-### Configuration
-Dark mode is configured in `src/styles/global.css`:
-
-```css
-/* Configure Tailwind v4 for class-based dark mode */
-@variant dark (&:where(.dark, .dark *));
-
-/* Dark theme variables */
-.dark {
-  --accent: #6b7fff;
-  /* ... more variables */
-}
-```
-
-### Usage in Components
-Use Tailwind's `dark:` variant throughout your components:
-
-```astro
-<div class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-  Content that adapts to the theme
-</div>
-```
-
-## 🛠️ Development Commands
-
-| Command | Action |
-|---------|--------|
-| `npm install` | Install dependencies |
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run astro` | Run Astro CLI commands |
-
-## 🎯 Customization
+## Customization
 
 ### Site Metadata
+
 Update site information in `src/consts.ts`:
 
 ```typescript
-export const SITE_TITLE = 'Your Blog Title';
-export const SITE_DESCRIPTION = 'Your blog description';
+export const SITE_TITLE = "Your Blog Title";
+export const SITE_DESCRIPTION = "Your blog description";
 export const SOCIAL_LINKS = [
   // Your social links
 ];
 ```
 
 ### Theme Colors
+
 Customize colors in `src/styles/global.css`:
+
 - Light mode: `:root` section (lines 11-37)
 - Dark mode: `.dark` section (lines 39-60)
 
 ### Deployment URL
+
 Update the site URL in `astro.config.mjs`:
 
 ```javascript
 export default defineConfig({
-  site: 'https://yourdomain.com',
+  site: "https://yourdomain.com",
   // ...
 });
 ```
 
-## 📊 Performance
+## Performance
 
 - **100/100 Lighthouse Score**: Optimized for performance, accessibility, SEO, and best practices
 - **Static Generation**: All pages pre-rendered at build time
@@ -184,13 +156,13 @@ export default defineConfig({
 - **Content**: [MDX](https://mdxjs.com) for enhanced Markdown
 - **Image Optimization**: [Sharp](https://sharp.pixelplumbing.com)
 
-## 📝 Content Collections
+## Content Collections
 
 Blog posts use Astro's Content Collections for type-safe content management:
 
 ```typescript
 // Query all posts
-const posts = await getCollection('blog');
+const posts = await getCollection("blog");
 
 // Posts are automatically validated against schema
 // Includes TypeScript autocomplete for frontmatter
@@ -198,7 +170,7 @@ const posts = await getCollection('blog');
 
 Schema defined in `src/content/config.ts` ensures content consistency.
 
-## 🌐 Deployment
+## Deployment
 
 This blog is optimized for static hosting platforms:
 
@@ -210,30 +182,27 @@ This blog is optimized for static hosting platforms:
 Build command: `npm run build`
 Output directory: `./dist`
 
-## 🤝 Contributing
+## Contributing
 
 This is a personal blog, but feel free to:
+
 - Open issues for bugs or suggestions
 - Submit PRs for improvements
 - Use this as a template for your own blog
 
-## 📄 License
+## License
 
 MIT License - feel free to use this for your own blog!
 
-## 🙏 Credits
+## Credits
 
 - Based on the [Bear Blog](https://github.com/HermanMartinus/bearblog/) template
 - Built with [Astro](https://astro.build)
 - Icons from [Heroicons](https://heroicons.com)
 - Fonts: Atkinson Hyperlegible (custom web font)
 
-## 📬 Contact
+## Contact
 
 - GitHub: [@chiltom](https://github.com/chiltom)
-- LinkedIn: [chiltom](https://linkedin.com/in/chiltom)
-- Email: [chilton.dooley.thomas@gmail.com](mailto:chilton.dooley.thomas@gmail.com)
-
----
-
-Built with 💙 by Tom using Astro and Claude Code
+- LinkedIn: [Thomas Childress](https://linkedin.com/in/thomas-childress)
+- Email: [Gmail](mailto:thomas.childress02@gmail.com)
