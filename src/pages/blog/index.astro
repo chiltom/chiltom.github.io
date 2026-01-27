@@ -122,7 +122,9 @@ const remainingPosts = posts.slice(1);
 											{post.data.description}
 										</p>
 										<div class="flex items-center justify-between">
-											<FormattedDate date={post.data.pubDate} class="text-sm text-gray-500 dark:text-gray-400" />
+                      <span class="text-sm text-gray-500 dark:text-gray-400">
+                        <FormattedDate date={post.data.pubDate} class="text-sm text-gray-500 dark:text-gray-400" />
+                      </span>
 											<span class="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">
 												Read more →
 											</span>

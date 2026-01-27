@@ -1,4 +1,4 @@
-# Tom's Notes
+# Margin Notes
 
 A modern, performant personal engineering blog built with Astro v5, featuring a seamless reading experience.
 

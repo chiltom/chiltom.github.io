@@ -4,7 +4,7 @@ This file is intended for future instances of Claude Code working in this reposi
 
 ## Project Overview
 
-**Tom's Notes** - A personal engineering blog built with Astro v5, based on the Bear Blog template with customizations.
+**Margin Notes** - A personal engineering blog built with Astro v5, based on the Bear Blog template with customizations.
 
 **Tech Stack:**
 - Astro v5.1.6 (Static Site Generator)
@@ -14,7 +14,7 @@ This file is intended for future instances of Claude Code working in this reposi
 - MDX for enhanced Markdown content
 
 **Site Metadata** (src/consts.ts):
-- Title: "Tom's Notes"
+- Title: "Margin Notes"
 - Description: "A Collection of Random Engineering Notes"
 
 ## Development Commands
